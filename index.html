@@ -80,6 +80,12 @@ h2 span{color:var(--blue)}
 .mini .cv b{font-size:18px;line-height:1.3;position:relative;z-index:1}
 .mini .bd{padding:12px 14px 14px;font-size:12px;color:var(--mute);line-height:1.6}
 .mini .cta{display:block;margin-top:10px;text-align:center;padding:9px;border-radius:10px;background:var(--blue-d);color:#fff;font-size:12.5px;font-weight:700}
+.one{border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line);max-width:330px}
+.one .cv{padding:18px;color:#fff}.one .cv small{display:block;font-size:10.5px;opacity:.85;line-height:1.5}
+.one .nmrow{display:flex;align-items:baseline;gap:8px;margin:8px 0 4px}.one .nmrow b{font-size:26px}.one .nmrow span{font-size:13px;opacity:.9}
+.one .bd{padding:16px;font-size:12px;color:var(--mute);line-height:1.7;background:#F4F6F8}.one .ph{font-size:20px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.one .cta{display:block;margin-top:12px;text-align:center;padding:9px;border-radius:10px;color:#fff;font-size:13px;font-weight:700}
+.one .two{display:flex;gap:8px;margin-top:8px}.one .two span{flex:1;text-align:center;padding:8px;border-radius:10px;background:#E3E7EC;color:var(--ink);font-size:12.5px;font-weight:700}
 .foot{margin-top:22px;text-align:center;font-size:11px;color:#94A0AE;line-height:1.7}
 
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#1B2430;color:#fff;font-size:13px;padding:10px 16px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;max-width:88%;text-align:center}
@@ -126,7 +132,7 @@ h2 span{color:var(--blue)}
   </div>
 
   <h2>把這張名片，<span>傳給朋友</span>。</h2>
-  <p class="sub">對方收到的是可以左右滑的 4 張名片卡，不是一串網址。</p>
+  <p class="sub">對方收到的是一張正式的名片卡，點一下就能加好友、打電話或看完整名片。</p>
 
   <button class="btn pri" id="bShare"><span class="ic">👥</span><span class="t"><b>分享名片給好友</b><small>一次挑多位好友或群組</small></span><span class="ar">›</span></button>
   <button class="btn" id="bSend"><span class="ic">💬</span><span class="t"><b>傳送到此聊天室</b><small>直接丟進現在這個對話</small></span><span class="ar">›</span></button>
@@ -150,9 +156,9 @@ h2 span{color:var(--blue)}
     <div><span>公司統編</span><b>80386316</b></div>
   </section>
 
-  <h2 style="font-size:18px">朋友收到的 4 張卡</h2>
-  <p class="sub">左右滑動看看</p>
-  <div class="scroller" id="scroller"></div>
+  <h2 style="font-size:18px">朋友收到的名片卡</h2>
+  <p class="sub">在 LINE 聊天室裡會長這樣</p>
+  <div id="preview"></div>
 
   <div class="foot">永旭保險經紀人．彰北營業部<br>蔡松翰 資深副總</div>
 </div>
@@ -175,28 +181,34 @@ document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");draw(b.dataset.k);
 });
 
-/* 分享出去的 4 張卡 */
-const CARDS = [
-  {k:"永旭保險經紀人．彰北營業部", t:"蔡松翰　資深副總", d:"0987-734-588\nMDRT｜人身／財產／外幣／投資型 合格", btn:"加我 LINE", url:CONFIG.LINE_URL},
-  {k:"保險法第九條", t:"站在保戶這一邊", d:"經紀人是基於保戶的利益，代向各大保險公司洽訂契約。", btn:"約時間聊聊", url:CONFIG.LINE_URL},
-  {k:"品牌不受限", t:"壽險 13 家・產險 14 家", d:"同一個需求，一次比較多家公司的方案，挑最適合你的。", btn:"幫我健檢保單", url:CONFIG.LINE_URL},
-  {k:"彰化市延平路 38 號 2 樓", t:"歡迎來辦公室坐坐", d:"公司電話 04-7119957\nsunghan69@gmail.com", btn:"開啟導航", url:CONFIG.MAP_URL}
-];
-const bubble = c => ({type:"bubble",size:"kilo",
-  hero:{type:"box",layout:"vertical",height:"118px",justifyContent:"flex-end",paddingAll:"16px",
-    background:{type:"linearGradient",angle:"135deg",startColor:"#245A9A",endColor:"#3B7BC4"},
-    contents:[{type:"text",text:c.k,size:"xxs",color:"#FFFFFFCC",wrap:true},
-              {type:"text",text:c.t,size:"lg",weight:"bold",color:"#FFFFFF",wrap:true}]},
-  body:{type:"box",layout:"vertical",paddingAll:"14px",backgroundColor:"#F4F6F8",
-    contents:[{type:"text",text:c.d,size:"sm",color:"#5E6B7A",wrap:true}]},
-  footer:{type:"box",layout:"vertical",paddingAll:"12px",backgroundColor:"#F4F6F8",
-    contents:[{type:"button",style:"primary",color:"#245A9A",height:"sm",action:{type:"uri",label:c.btn,uri:c.url}}]}
-});
-const FLEX = {type:"flex",altText:"蔡松翰｜永旭保險經紀人 電子名片",contents:{type:"carousel",contents:CARDS.map(bubble)}};
+/* 分享出去的名片卡（1 張） */
+const CARD = {org:"永旭保險經紀人．彰北營業部", name:"蔡松翰", title:"資深副總", tag:"MDRT・人身／財產／外幣／投資型保險業務員資格合格", phone:"0987-734-588", tel:"tel:0987734588", line2:"壽險 13 家・產險 14 家｜品牌不受限　專業更客觀", addr:"彰化市延平路 38 號 2 樓"};
+const C1="#245A9A", C2="#3B7BC4";
+const FLEX = {type:"flex",altText:CARD.name+"｜永旭保險經紀人 電子名片",contents:{type:"bubble",size:"mega",
+  hero:{type:"box",layout:"vertical",paddingAll:"20px",spacing:"xs",
+    background:{type:"linearGradient",angle:"135deg",startColor:C1,endColor:C2},
+    contents:[{type:"text",text:CARD.org,size:"xxs",color:"#FFFFFFCC",wrap:true},
+      {type:"box",layout:"baseline",spacing:"sm",margin:"md",contents:[
+        {type:"text",text:CARD.name,size:"xxl",weight:"bold",color:"#FFFFFF",flex:0},
+        {type:"text",text:CARD.title,size:"sm",color:"#FFFFFFE6",wrap:true}]},
+      {type:"text",text:CARD.tag,size:"xxs",color:"#FFFFFFCC",wrap:true,margin:"sm"}]},
+  body:{type:"box",layout:"vertical",paddingAll:"18px",spacing:"sm",backgroundColor:"#F4F6F8",contents:[
+    {type:"text",text:CARD.phone,size:"xl",weight:"bold",color:"#1B2430"},
+    {type:"text",text:CARD.line2,size:"xs",color:"#5E6B7A",wrap:true},
+    {type:"text",text:CARD.addr,size:"xs",color:"#5E6B7A",wrap:true}]},
+  footer:{type:"box",layout:"vertical",paddingAll:"14px",spacing:"sm",backgroundColor:"#F4F6F8",contents:[
+    {type:"button",style:"primary",color:C1,height:"sm",action:{type:"uri",label:"加我好友",uri:CONFIG.LINE_URL}},
+    {type:"box",layout:"horizontal",spacing:"sm",contents:[
+      {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
+      {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"打電話",uri:CARD.tel}}]}]}
+}};
 
-document.getElementById("scroller").innerHTML = CARDS.map(c=>`
-  <div class="mini"><div class="cv" style="background:linear-gradient(135deg,#245A9A,#3B7BC4)"><small>${c.k}</small><b>${c.t}</b></div>
-  <div class="bd">${c.d.replace(/\n/g,"<br>")}<span class="cta">${c.btn}</span></div></div>`).join("");
+document.getElementById("preview").innerHTML = `
+  <div class="one"><div class="cv" style="background:linear-gradient(135deg,${C1},${C2})">
+    <small>${CARD.org}</small><div class="nmrow"><b>${CARD.name}</b><span>${CARD.title}</span></div><small>${CARD.tag}</small></div>
+  <div class="bd"><div class="ph">${CARD.phone}</div>${CARD.line2}<br>${CARD.addr}
+    <span class="cta" style="background:${C1}">加我好友</span>
+    <div class="two"><span>看完整名片</span><span>打電話</span></div></div></div>`;
 
 /* 按鈕 */
 const toast = m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};

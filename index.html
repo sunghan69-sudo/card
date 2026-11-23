@@ -185,17 +185,8 @@ document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
 const CARD = {org:"永旭保險經紀人．彰北營業部", name:"蔡松翰", title:"資深副總", tag:"MDRT・人身／財產／外幣／投資型保險業務員資格合格", phone:"0987-734-588", tel:"tel:0987734588", line2:"壽險 13 家・產險 14 家｜品牌不受限　專業更客觀", addr:"彰化市延平路 38 號 2 樓"};
 const C1="#245A9A", C2="#3B7BC4";
 const FLEX = {type:"flex",altText:CARD.name+"｜永旭保險經紀人 電子名片",contents:{type:"bubble",size:"mega",
-  hero:{type:"box",layout:"vertical",paddingAll:"20px",spacing:"xs",
-    background:{type:"linearGradient",angle:"135deg",startColor:C1,endColor:C2},
-    contents:[{type:"text",text:CARD.org,size:"xxs",color:"#FFFFFFCC",wrap:true},
-      {type:"box",layout:"baseline",spacing:"sm",margin:"md",contents:[
-        {type:"text",text:CARD.name,size:"xxl",weight:"bold",color:"#FFFFFF",flex:0},
-        {type:"text",text:CARD.title,size:"sm",color:"#FFFFFFE6",wrap:true}]},
-      {type:"text",text:CARD.tag,size:"xxs",color:"#FFFFFFCC",wrap:true,margin:"sm"}]},
-  body:{type:"box",layout:"vertical",paddingAll:"18px",spacing:"sm",backgroundColor:"#F4F6F8",contents:[
-    {type:"text",text:CARD.phone,size:"xl",weight:"bold",color:"#1B2430"},
-    {type:"text",text:CARD.line2,size:"xs",color:"#5E6B7A",wrap:true},
-    {type:"text",text:CARD.addr,size:"xs",color:"#5E6B7A",wrap:true}]},
+  hero:{type:"image",url:"https://sunghan69-sudo.github.io/card/card.jpg",size:"full",aspectRatio:"1116:900",aspectMode:"cover",
+    action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
   footer:{type:"box",layout:"vertical",paddingAll:"14px",spacing:"sm",backgroundColor:"#F4F6F8",contents:[
     {type:"button",style:"primary",color:C1,height:"sm",action:{type:"uri",label:"加我好友",uri:CONFIG.LINE_URL}},
     {type:"box",layout:"horizontal",spacing:"sm",contents:[
@@ -204,10 +195,8 @@ const FLEX = {type:"flex",altText:CARD.name+"｜永旭保險經紀人 電子名�
 }};
 
 document.getElementById("preview").innerHTML = `
-  <div class="one"><div class="cv" style="background:linear-gradient(135deg,${C1},${C2})">
-    <small>${CARD.org}</small><div class="nmrow"><b>${CARD.name}</b><span>${CARD.title}</span></div><small>${CARD.tag}</small></div>
-  <div class="bd"><div class="ph">${CARD.phone}</div>${CARD.line2}<br>${CARD.addr}
-    <span class="cta" style="background:${C1}">加我好友</span>
+  <div class="one"><img src="card.jpg" style="display:block;width:100%" alt="名片">
+  <div class="bd"><span class="cta" style="background:${C1};margin-top:0">加我好友</span>
     <div class="two"><span>看完整名片</span><span>打電話</span></div></div></div>`;
 
 /* 按鈕 */

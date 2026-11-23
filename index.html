@@ -132,7 +132,7 @@ h2 span{color:var(--blue)}
   </div>
 
   <h2>把這張名片，<span>傳給朋友</span>。</h2>
-  <p class="sub">對方收到的是一張正式的名片卡，點一下就能加好友、打電話或看完整名片。</p>
+  <p class="sub">對方收到的是一張正式的名片卡，點一下就能打電話或看完整名片。</p>
 
   <button class="btn pri" id="bShare"><span class="ic">👥</span><span class="t"><b>分享名片給好友</b><small>一次挑多位好友或群組</small></span><span class="ar">›</span></button>
   <button class="btn" id="bSend"><span class="ic">💬</span><span class="t"><b>傳送到此聊天室</b><small>直接丟進現在這個對話</small></span><span class="ar">›</span></button>
@@ -187,17 +187,14 @@ const C1="#245A9A", C2="#3B7BC4";
 const FLEX = {type:"flex",altText:CARD.name+"｜永旭保險經紀人 電子名片",contents:{type:"bubble",size:"mega",
   hero:{type:"image",url:"https://sunghan69-sudo.github.io/card/card.jpg",size:"full",aspectRatio:"1116:900",aspectMode:"cover",
     action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
-  footer:{type:"box",layout:"vertical",paddingAll:"14px",spacing:"sm",backgroundColor:"#F4F6F8",contents:[
-    {type:"button",style:"primary",color:C1,height:"sm",action:{type:"uri",label:"加我好友",uri:CONFIG.LINE_URL}},
-    {type:"box",layout:"horizontal",spacing:"sm",contents:[
-      {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
-      {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"打電話",uri:CARD.tel}}]}]}
+  footer:{type:"box",layout:"horizontal",paddingAll:"14px",spacing:"sm",backgroundColor:"#F4F6F8",contents:[
+    {type:"button",style:"primary",color:C1,height:"sm",action:{type:"uri",label:"打電話",uri:CARD.tel}},
+    {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}}]}
 }};
 
 document.getElementById("preview").innerHTML = `
   <div class="one"><img src="card.jpg" style="display:block;width:100%" alt="名片">
-  <div class="bd"><span class="cta" style="background:${C1};margin-top:0">加我好友</span>
-    <div class="two"><span>看完整名片</span><span>打電話</span></div></div></div>`;
+  <div class="bd"><div class="two" style="margin-top:0"><span style="background:${C1};color:#fff">打電話</span><span>看完整名片</span></div></div></div>`;
 
 /* 按鈕 */
 const toast = m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};

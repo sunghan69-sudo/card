@@ -199,15 +199,27 @@ document.getElementById("preview").innerHTML = `
 /* 按鈕 */
 const toast = m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};
 let liffReady=false;
-(async()=>{try{if(window.liff&&CONFIG.LIFF_ID){await liff.init({liffId:CONFIG.LIFF_ID});liffReady=true;}}catch(e){console.log(e);}})();
-
-document.getElementById("bShare").onclick=async()=>{
+const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+const wantShare=new URLSearchParams(location.search).get("share")==="1";
+function openOut(u){try{const w=window.open(u,"_blank");if(w)return}catch(e){}try{window.top.location.href=u}catch(e){location.href=u}}
+const liffInit=(async()=>{try{if(window.liff&&CONFIG.LIFF_ID){await liff.init({liffId:CONFIG.LIFF_ID});liffReady=true;}}catch(e){console.log(e);}
+  if(wantShare&&liffReady&&liff.isInClient())doShare();})();
+async function doShare(){
+  await liffInit;
   if(liffReady&&liff.isApiAvailable("shareTargetPicker")){
     try{const r=await liff.shareTargetPicker([FLEX]);if(r)toast("已傳送，謝謝幫我分享！");}catch(e){toast("分享沒有完成，請再試一次");}
-  }else location.href="https://line.me/R/share?text="+encodeURIComponent("推薦你陳欣瑜（永旭保險經紀人）的電子名片 👉 "+CONFIG.CARD_URL);
-};
+    return;
+  }
+  if(liffReady&&!inFrame&&!liff.isInClient()&&!liff.isLoggedIn()){liff.login({redirectUri:location.origin+location.pathname+"?share=1"});return}
+  /* 在 CRM 內嵌、或其他瀏覽器：改到 LINE 打開名片並直接跳出選好友 */
+  if(CONFIG.LIFF_ID){openOut(CONFIG.CARD_URL+"?share=1");return}
+  openOut("https://line.me/R/share?text="+encodeURIComponent("推薦你"+CARD.name+"（永旭保險經紀人）的電子名片 👉 "+CONFIG.CARD_URL));
+}
+document.getElementById("bShare").onclick=()=>doShare();
 document.getElementById("bSend").onclick=async()=>{
+  await liffInit;
   if(liffReady&&liff.isInClient()){try{await liff.sendMessages([FLEX]);toast("已傳到聊天室");}catch(e){toast("請從聊天室裡打開這張名片再試");}}
+  else if(inFrame&&CONFIG.LIFF_ID)openOut(CONFIG.CARD_URL);
   else toast("這個功能要在 LINE 聊天室裡打開名片才能用");
 };
 document.getElementById("bVcf").onclick=()=>{

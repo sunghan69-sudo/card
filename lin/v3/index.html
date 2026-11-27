@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>林子喨｜泰豐淨水 電子名片（版本 C：深色分頁式）</title>
+<title>林子喨｜泰豐淨水 電子名片</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <style>
@@ -50,6 +50,14 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans TC",system-ui,
 .dock{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(7,24,47,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;gap:8px;justify-content:center;z-index:5}
 .dock a,.dock button{flex:1;max-width:140px;border:none;border-radius:14px;padding:12px 6px;font:inherit;font-weight:700;font-size:13.5px;text-align:center;text-decoration:none;cursor:pointer}
 .dock .call{background:var(--panel2);color:#fff}.dock .line{background:#06C755;color:#fff}.dock .share{background:linear-gradient(120deg,#1E6FC0,var(--aqua));color:#fff}
+.share1{width:100%;border:1px dashed rgba(143,220,255,.45);background:transparent;color:var(--aqua2);border-radius:14px;padding:12px;font:inherit;font-size:13.5px;margin-bottom:12px;cursor:pointer}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.sheet.on{display:flex}
+.sheet .panel{width:100%;max-width:440px;background:var(--panel);border-radius:22px 22px 0 0;padding:16px 14px calc(18px + env(safe-area-inset-bottom));border:1px solid var(--line)}
+.sheet .h{display:flex;justify-content:space-between;font-weight:700;margin:2px 4px 12px}.sheet .x{cursor:pointer;color:var(--mute)}
+.sheet button{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);color:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;font:inherit;cursor:pointer}
+.sheet button b{display:block;font-size:14.5px}.sheet button small{font-size:11.5px;color:var(--mute)}
+.sheet button[data-k=all]{background:linear-gradient(120deg,#1E6FC0,#4FC3F7);border:none}.sheet button[data-k=all] small{color:#E3F4FF}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#fff;color:#07182F;font-size:13px;padding:10px 16px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;max-width:88%;text-align:center;z-index:9}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -80,7 +88,8 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans TC",system-ui,
   <div class="pane on" id="p1">
     <div class="box"><h3>泰豐淨水</h3><p>彰化在地淨水品牌，生產逆滲透純水機、飲水機及商業、工業用 RO 設備，從設計、規劃到安裝一手包辦。</p></div>
     <div class="box"><div class="stats"><div><b>1998</b><small>成立</small></div><div><b>ISO</b><small>9001 認證</small></div><div><b>3M</b><small>櫻花經銷</small></div></div></div>
-    <div class="box"><h3>分享這張名片</h3><div class="btns"><button id="bSend">傳到此聊天室</button><button id="bCopy">複製名片連結</button></div></div>
+    <button class="share1" data-k="about">↗ 單獨分享「公司介紹」</button>
+    <div class="box"><h3>分享整套名片</h3><div class="btns"><button id="bSend">傳到此聊天室</button><button id="bCopy">複製名片連結</button></div></div>
   </div>
 
   <div class="pane" id="p2">
@@ -92,6 +101,7 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans TC",system-ui,
       <li><div><b>到府水質檢測</b><small>了解水質再挑設備</small></div></li>
       <li><div><b>規劃與安裝</b><small>選機、管路一次到位</small></div></li>
       <li><div><b>定期保養</b><small>濾心更換提醒・清洗水塔</small></div></li></ol></div>
+    <button class="share1" data-k="svc">↗ 單獨分享「產品與服務」</button>
   </div>
 
   <div class="pane" id="p3">
@@ -106,6 +116,7 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans TC",system-ui,
       <div class="row"><span>Facebook</span><a href="https://www.facebook.com/TYPHOON.TECH.CO.LTD/">泰豐科技粉絲專頁</a></div>
       <div class="row"><span>統編</span>80409774</div>
     </div>
+    <button class="share1" data-k="contact">↗ 單獨分享「聯絡資訊」</button>
     <div class="box"><div class="btns"><button id="bVcf">存入通訊錄</button><a href="https://www.typ-hoon.com.tw">看官網</a></div></div>
   </div>
   <div class="slogan">珍貴的水獻給珍貴的家人</div>
@@ -116,54 +127,94 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans TC",system-ui,
   <a class="line" href="https://line.me/ti/p/0ij0oKbHrr">加 LINE</a>
   <button class="share" id="bShare">分享名片</button>
 </div>
+<div class="sheet" id="sheet"><div class="panel">
+  <div class="h">要分享哪一份？<span class="x">✕</span></div>
+  <button data-k="all"><b>整套名片</b><small>名片＋介紹＋服務＋聯絡，對方可左右滑 4 頁</small></button>
+  <button data-k="card"><b>只分享名片</b><small>一張名片卡</small></button>
+  <button data-k="about"><b>公司介紹</b><small>泰豐淨水簡介與認證</small></button>
+  <button data-k="svc"><b>產品與服務</b><small>產品＋4 步服務流程</small></button>
+  <button data-k="contact"><b>聯絡資訊</b><small>電話、營業時間、地址＋導航</small></button>
+</div></div>
 <div class="toast" id="toast"></div>
 
 <script>
 const CONFIG = {LIFF_ID:"", CARD_URL:"https://sunghan69-sudo.github.io/card/lin/v3/", LINE_URL:"https://line.me/ti/p/0ij0oKbHrr"};
-const CARD = {name:"林子喨", tel:"tel:0920073252"};
-const C1="#0E2E5A";
-const FLEX = {type:"flex",altText:"林子喨｜泰豐淨水 電子名片",contents:{type:"bubble",size:"mega",
-  hero:{type:"image",url:"https://sunghan69-sudo.github.io/card/lin/v3/card.jpg",size:"full",aspectRatio:"1116:1080",aspectMode:"cover",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
-  footer:{type:"box",layout:"horizontal",paddingAll:"14px",spacing:"sm",backgroundColor:"#07182F",contents:[
-    {type:"button",style:"primary",color:"#1E6FC0",height:"sm",action:{type:"uri",label:"打電話",uri:CARD.tel}},
-    {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}}]}}};
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));
-  document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id===b.dataset.t));
-});
-const toast = m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};
+const TEL="tel:0920073252", MAP="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("彰化縣和美鎮彰美路三段83號"), WEB="https://www.typ-hoon.com.tw";
+const BG="#0E2544", AQ="#8FDCFF", MU="#9DB3CC", BL="#1E6FC0";
+const page=k=>CONFIG.CARD_URL+"?p="+k;
+const T=(text,o={})=>Object.assign({type:"text",text,wrap:true,color:"#EAF4FF",size:"sm"},o);
+const btn=(label,uri,primary)=>({type:"button",style:primary?"primary":"secondary",color:primary?BL:undefined,height:"sm",action:{type:"uri",label,uri}});
+const row=(k,v)=>({type:"box",layout:"baseline",spacing:"md",contents:[T(k,{color:MU,size:"xs",flex:2}),T(v,{size:"xs",flex:5})]});
+function shell(tag,title,body,footer){return {type:"bubble",size:"mega",styles:{body:{backgroundColor:BG},footer:{backgroundColor:BG}},
+  body:{type:"box",layout:"vertical",spacing:"md",paddingAll:"20px",contents:[T(tag,{color:AQ,size:"xxs"}),T(title,{weight:"bold",size:"lg",color:"#FFFFFF"}),{type:"separator",color:"#2A4B78"},...body]},
+  footer:{type:"box",layout:"horizontal",spacing:"sm",paddingAll:"14px",contents:footer}}}
+const B={
+  card:{type:"bubble",size:"mega",styles:{footer:{backgroundColor:"#07182F"}},
+    hero:{type:"image",url:CONFIG.CARD_URL+"card.jpg",size:"full",aspectRatio:"1116:1080",aspectMode:"cover",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
+    footer:{type:"box",layout:"horizontal",spacing:"sm",paddingAll:"14px",contents:[btn("打電話",TEL,true),btn("看完整名片",CONFIG.CARD_URL)]}},
+  about:shell("01 關於","泰豐淨水",[
+    T("彰化在地淨水品牌，生產逆滲透純水機、飲水機及商業、工業用 RO 設備，從設計、規劃到安裝一手包辦。",{color:MU,size:"xs"}),
+    {type:"box",layout:"horizontal",spacing:"sm",contents:[["1998","成立"],["ISO","9001 認證"],["3M","櫻花經銷"]].map(([a,b])=>({type:"box",layout:"vertical",backgroundColor:"#13305A",cornerRadius:"10px",paddingAll:"10px",contents:[T(a,{color:AQ,weight:"bold",align:"center",size:"md"}),T(b,{color:MU,size:"xxs",align:"center"})]}))}
+  ],[btn("看官網",WEB,true),btn("更多介紹",page("p1"))]),
+  svc:shell("02 服務","產品與服務流程",[
+    T("RO 純水機・飲水機・全戶淨水／軟水・Panasonic 電解水機",{size:"xs"}),
+    ...["LINE 諮詢","到府水質檢測","規劃與安裝","定期保養・濾心提醒"].map((s,i)=>({type:"box",layout:"baseline",spacing:"md",contents:[T(String(i+1),{color:AQ,weight:"bold",size:"sm",flex:0}),T(s,{size:"xs"})]}))
+  ],[btn("LINE 問我",CONFIG.LINE_URL,true),btn("看服務",page("p2"))]),
+  contact:shell("03 聯絡","林子喨｜泰豐科技",[
+    row("手機","0920-073252"),row("公司","04-7555548（代表號）"),row("傳真","04-7575721"),row("營業","週一～五 8:30–18:00・週六 8:30–12:00"),row("地址","彰化縣和美鎮彰美路三段83號")
+  ],[btn("打電話",TEL,true),btn("導航",MAP)])
+};
+const ALT={card:"林子喨｜泰豐淨水 電子名片",about:"泰豐淨水｜公司介紹",svc:"泰豐淨水｜產品與服務流程",contact:"林子喨｜泰豐淨水 聯絡資訊"};
+function msgOf(k){
+  if(k==="all")return [{type:"flex",altText:ALT.card+"（左右滑看更多）",contents:{type:"carousel",contents:[B.card,B.about,B.svc,B.contact]}}];
+  return [{type:"flex",altText:ALT[k],contents:B[k]}];
+}
+const NAME={all:"整套名片（可左右滑 4 頁）",card:"名片",about:"公司介紹",svc:"產品與服務",contact:"聯絡資訊"};
+
+const toast=m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};
 let liffReady=false;
 const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
-const wantShare=new URLSearchParams(location.search).get("share")==="1";
 function openOut(u){try{const w=window.open(u,"_blank");if(w)return}catch(e){}try{window.top.location.href=u}catch(e){location.href=u}}
+function showTab(id){if(!document.getElementById(id))return;document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===id));document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id===id));}
 const liffInit=(async()=>{try{if(window.liff&&CONFIG.LIFF_ID){await liff.init({liffId:CONFIG.LIFF_ID});liffReady=true;}}catch(e){console.log(e);}
-  if(wantShare&&liffReady&&liff.isInClient())doShare();})();
-async function doShare(){
+  const q=new URLSearchParams(location.search); if(q.get("p"))showTab(q.get("p"));
+  const k=q.get("share"); if(k&&liffReady&&liff.isInClient())share(k==="1"?"all":k);})();
+async function share(k){
   await liffInit;
   if(liffReady&&liff.isApiAvailable("shareTargetPicker")){
-    try{const r=await liff.shareTargetPicker([FLEX]);if(r)toast("已傳送，謝謝幫我分享！");}catch(e){toast("分享沒有完成，請再試一次");}
+    try{const r=await liff.shareTargetPicker(msgOf(k));if(r)toast("已分享："+NAME[k]);}catch(e){toast("分享沒有完成，請再試一次");}
     return;
   }
-  if(liffReady&&!inFrame&&!liff.isInClient()&&!liff.isLoggedIn()){liff.login({redirectUri:location.origin+location.pathname+"?share=1"});return}
-  if(CONFIG.LIFF_ID){openOut(CONFIG.CARD_URL+"?share=1");return}
-  openOut("https://line.me/R/share?text="+encodeURIComponent("推薦你林子喨（泰豐科技・淨水設備）的電子名片 👉 "+CONFIG.CARD_URL));
+  if(liffReady&&!inFrame&&!liff.isInClient()&&!liff.isLoggedIn()){liff.login({redirectUri:location.origin+location.pathname+"?share="+k});return}
+  if(CONFIG.LIFF_ID){openOut(CONFIG.CARD_URL+"?share="+k);return}
+  openOut("https://line.me/R/share?text="+encodeURIComponent("推薦你林子喨（泰豐淨水）的電子名片 👉 "+CONFIG.CARD_URL));
 }
-document.getElementById("bShare").onclick=()=>doShare();
-document.getElementById("bSend").onclick=async()=>{
+async function sendHere(k){
   await liffInit;
-  if(liffReady&&liff.isInClient()){try{await liff.sendMessages([FLEX]);toast("已傳到聊天室");}catch(e){toast("請從聊天室裡打開這張名片再試");}}
+  if(liffReady&&liff.isInClient()){try{await liff.sendMessages(msgOf(k));toast("已傳到聊天室");}catch(e){toast("請從聊天室裡打開這張名片再試");}}
   else if(inFrame&&CONFIG.LIFF_ID)openOut(CONFIG.CARD_URL);
   else toast("這個功能要在 LINE 聊天室裡打開名片才能用");
-};
+}
+/* 分頁：點選＋左右滑 */
+const order=["p1","p2","p3"];
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+let sx=null;document.addEventListener("touchstart",e=>{if(e.target.closest(".pane"))sx=e.touches[0].clientX},{passive:true});
+document.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)<60)return;
+  const cur=order.indexOf(document.querySelector(".pane.on").id);const n=cur+(dx<0?1:-1);if(n>=0&&n<order.length)showTab(order[n]);});
+/* 分享選單 */
+const sheet=document.getElementById("sheet");
+document.getElementById("bShare").onclick=()=>sheet.classList.add("on");
+sheet.onclick=e=>{const b=e.target.closest("[data-k]");if(b){sheet.classList.remove("on");share(b.dataset.k);}else if(e.target===sheet||e.target.closest(".x"))sheet.classList.remove("on");};
+document.querySelectorAll(".share1").forEach(b=>b.onclick=()=>share(b.dataset.k));
+document.getElementById("bSend").onclick=()=>sendHere("all");
 document.getElementById("bVcf").onclick=()=>{
   const v=["BEGIN:VCARD","VERSION:3.0","N:林;子喨;;;","FN:林子喨","ORG:泰豐科技有限公司","EMAIL;TYPE=WORK:n1419@ms56.hinet.net",
     "TEL;TYPE=CELL:0920-073252","TEL;TYPE=WORK:04-7555548","TEL;TYPE=FAX:04-7575721",
-    "ADR;TYPE=WORK:;;彰美路三段83號;和美鎮;彰化縣;;台灣","URL:https://www.typ-hoon.com.tw","NOTE:LINE "+CONFIG.LINE_URL+"\\n電子名片 "+CONFIG.CARD_URL,"END:VCARD"].join("\r\n");
+    "ADR;TYPE=WORK:;;彰美路三段83號;和美鎮;彰化縣;;台灣","URL:"+WEB,"NOTE:LINE "+CONFIG.LINE_URL+"\\n電子名片 "+CONFIG.CARD_URL,"END:VCARD"].join("\r\n");
   try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([v],{type:"text/vcard"}));a.download="林子喨-泰豐科技.vcf";a.click();toast("已下載聯絡人檔，點開即可存入");}
   catch(e){toast("請在手機瀏覽器開啟後再存");}
 };
 document.getElementById("bCopy").onclick=async()=>{try{await navigator.clipboard.writeText(CONFIG.CARD_URL);toast("名片連結已複製");}catch(e){toast(CONFIG.CARD_URL);}};
-
 </script>
 </body>
 </html>

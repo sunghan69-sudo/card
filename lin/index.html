@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>林子喨｜泰豐科技 LINE 電子名片</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<style>
+:root{--deep:#1C3F7A;--blue:#2D6FB8;--sky:#7FB7E6;--mist:#EAF4FC;--ink:#18263A;--mute:#5D6B7C;--line:#DCE6F0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#EEF4FA;color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:440px;margin:0 auto;padding:16px 14px 40px}
+.top{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.16em;color:var(--mute);margin:2px 4px 12px}
+.top b{color:var(--blue)}
+
+/* 主卡：白底＋水波 */
+.hero{position:relative;border-radius:22px;overflow:hidden;min-height:330px;background:linear-gradient(160deg,#FFFFFF 0%,#F2F8FD 45%,#DCEBF8 100%);box-shadow:0 20px 40px -22px rgba(28,63,122,.55)}
+.hero svg.water{position:absolute;inset:0;width:100%;height:100%}
+.brand{position:absolute;left:22px;top:22px;right:22px}
+.co{display:flex;align-items:center;gap:10px}
+.co .drop{width:40px;height:40px;flex:0 0 auto}
+.co b{display:block;font-size:19px;font-weight:900;color:var(--deep);letter-spacing:.06em}
+.co small{display:block;font-family:Montserrat,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.14em;color:var(--blue)}
+.svc{margin-top:10px;padding-top:8px;border-top:1px solid #9FB7D3;font-size:12px;color:var(--deep);letter-spacing:.12em;display:inline-block}
+.info{position:absolute;left:22px;bottom:22px}
+.info .nm{font-size:32px;font-weight:900;letter-spacing:.18em;color:var(--ink)}
+.info .ph{font-family:Montserrat,sans-serif;font-size:22px;font-weight:500;letter-spacing:.06em;margin-top:4px;color:var(--ink)}
+.info .web{font-family:Montserrat,sans-serif;font-size:11px;color:var(--blue);margin-top:6px;letter-spacing:.04em}
+
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.quick a{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 4px 9px;text-align:center;text-decoration:none;color:var(--ink);font-size:11.5px}
+.quick a i{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 5px;border-radius:50%;background:var(--mist);color:var(--blue);font-style:normal}
+
+h2{font-size:21px;font-weight:900;margin:24px 4px 4px}
+h2 span{color:var(--blue)}
+.sub{font-size:12px;color:var(--mute);margin:0 4px 12px}
+.btn{width:100%;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.btn:active{transform:scale(.98)}
+.btn .ic{width:36px;height:36px;border-radius:10px;background:var(--mist);color:var(--blue);display:grid;place-items:center;flex:0 0 auto}
+.btn .t{flex:1}.btn b{display:block;font-size:14.5px}.btn small{font-size:11.5px;color:var(--mute)}
+.btn .ar{color:#A9B6C4}
+.btn.pri{background:linear-gradient(120deg,var(--deep),var(--blue));border:none;color:#fff}
+.btn.pri .ic{background:rgba(255,255,255,.16);color:#fff}.btn.pri small,.btn.pri .ar{color:#D6E6F7}
+
+/* 服務項目 */
+.svcbox{margin-top:26px;border-radius:20px;background:linear-gradient(150deg,var(--deep),var(--blue));color:#fff;padding:22px 18px;text-align:center}
+.svcbox h3{font-size:18px;font-weight:900;letter-spacing:.14em}
+.svcbox p{font-size:12.5px;opacity:.9;margin-top:6px}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+.grid4 div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:14px 6px}
+.grid4 b{display:block;font-size:15px;letter-spacing:.08em}
+.grid4 small{display:block;font-size:11px;opacity:.85;margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}.tags span{font-size:11.5px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.16)}
+.slogan{margin-top:14px;font-size:15px;font-weight:700;letter-spacing:.1em}
+.svcbox a{display:inline-block;margin-top:16px;color:#fff;font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.6);border-radius:999px;padding:8px 18px}
+
+.detail{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:6px 16px}
+.detail div{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #EEF2F7;font-size:13px}
+.detail div:last-child{border:none}
+.detail span{color:var(--mute);flex:0 0 auto}
+.detail b{font-weight:500;text-align:right;word-break:break-all}
+
+.one{border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line);max-width:330px}
+.one .bd{padding:14px;background:#F4F7FA}
+.one .two{display:flex;gap:8px}.one .two span{flex:1;text-align:center;padding:9px;border-radius:10px;background:#E3E9F0;color:var(--ink);font-size:12.5px;font-weight:700}
+.foot{margin-top:22px;text-align:center;font-size:11px;color:#94A3B4;line-height:1.7}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#18263A;color:#fff;font-size:13px;padding:10px 16px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;max-width:88%;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>LINE 電子名片</span><b>TYPHOON TECH</b></div>
+
+  <section class="hero">
+    <svg class="water" viewBox="0 0 400 330" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="w1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7FB7E6" stop-opacity=".0"/><stop offset=".5" stop-color="#7FB7E6" stop-opacity=".55"/><stop offset="1" stop-color="#2D6FB8" stop-opacity=".75"/></linearGradient>
+        <linearGradient id="w2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2D6FB8" stop-opacity=".0"/><stop offset="1" stop-color="#1C3F7A" stop-opacity=".55"/></linearGradient>
+        <radialGradient id="bub" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#CFE5F7" stop-opacity=".7"/><stop offset="1" stop-color="#7FB7E6" stop-opacity=".25"/></radialGradient>
+      </defs>
+      <path d="M0 240 C 90 200, 170 280, 260 235 S 360 180, 400 205 V330 H0Z" fill="url(#w1)"/>
+      <path d="M0 280 C 110 250, 200 320, 290 280 S 370 245, 400 260 V330 H0Z" fill="url(#w2)"/>
+      <g fill="none" stroke="#2D6FB8" stroke-opacity=".28"><ellipse cx="320" cy="150" rx="60" ry="14"/><ellipse cx="320" cy="150" rx="38" ry="9"/><ellipse cx="320" cy="150" rx="18" ry="4"/></g>
+      <path d="M320 96 C 328 112, 334 122, 334 131 A14 14 0 0 1 306 131 C 306 122, 312 112, 320 96Z" fill="#2D6FB8" fill-opacity=".55"/>
+      <circle cx="292" cy="200" r="7" fill="url(#bub)"/><circle cx="352" cy="190" r="5" fill="url(#bub)"/><circle cx="370" cy="120" r="9" fill="url(#bub)"/><circle cx="268" cy="168" r="4" fill="url(#bub)"/>
+    </svg>
+    <div class="brand">
+      <div class="co">
+        <svg class="drop" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FB7E6"/><stop offset="1" stop-color="#1C3F7A"/></linearGradient></defs><path d="M20 3 C 27 14, 33 21, 33 27 A13 13 0 0 1 7 27 C 7 21, 13 14, 20 3Z" fill="url(#dg)"/><path d="M14 27 a6 6 0 0 0 6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".8"/></svg>
+        <div><b>泰豐科技有限公司</b><small>TYPHOON TECH CO., LTD.</small></div>
+      </div>
+      <div class="svc">RO純水機・飲水機・軟水機・全戶過濾</div>
+    </div>
+    <div class="info">
+      <div class="nm">林子喨</div>
+      <div class="ph">0920-073252</div>
+      <div class="web">www.typ-hoon.com.tw</div>
+    </div>
+  </section>
+
+  <div class="quick">
+    <a href="tel:0920073252"><i>☎</i>打電話</a>
+    <a href="https://line.me/ti/p/0ij0oKbHrr"><i>L</i>加 LINE</a>
+    <a href="https://www.typ-hoon.com.tw"><i>🌐</i>官網</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=彰化縣和美鎮彰美路三段83號"><i>⌖</i>導航</a>
+  </div>
+
+  <h2>把這張名片，<span>傳給朋友</span>。</h2>
+  <p class="sub">對方收到的是一張正式的名片卡，點一下就能打電話或看完整名片。</p>
+
+  <button class="btn pri" id="bShare"><span class="ic">👥</span><span class="t"><b>分享名片給好友</b><small>一次挑多位好友或群組</small></span><span class="ar">›</span></button>
+  <button class="btn" id="bSend"><span class="ic">💬</span><span class="t"><b>傳送到此聊天室</b><small>直接丟進現在這個對話</small></span><span class="ar">›</span></button>
+  <button class="btn" id="bVcf"><span class="ic">📇</span><span class="t"><b>加入聯絡人</b><small>手機、公司電話、地址一次存好</small></span><span class="ar">›</span></button>
+  <button class="btn" id="bCopy"><span class="ic">🔗</span><span class="t"><b>複製名片連結</b><small>貼到任何地方都能開</small></span><span class="ar">›</span></button>
+
+  <section class="svcbox">
+    <h3>服務項目</h3>
+    <p>1998 年成立・ISO 9001 認證・3M／櫻花淨水器經銷</p>
+    <div class="grid4">
+      <div><b>RO純水機</b><small>逆滲透純水設備</small></div>
+      <div><b>飲水機</b><small>豪星等品牌</small></div>
+      <div><b>全戶軟水</b><small>全戶淨水・軟水</small></div>
+      <div><b>電解水機</b><small>Panasonic</small></div>
+    </div>
+    <div class="tags"><span>清洗水塔</span><span>水質檢測</span><span>濾心更換提醒</span><span>設備維護</span><span>管路更新</span></div>
+    <div class="slogan">「珍貴的水獻給珍貴的家人」</div>
+    <a href="https://www.typ-hoon.com.tw">看官網 ↗</a>
+  </section>
+
+  <section class="detail">
+    <div><span>公司電話</span><b>04-7555548（代表號）</b></div>
+    <div><span>傳真</span><b>04-7575721</b></div>
+    <div><span>官網</span><b>www.typ-hoon.com.tw</b></div>
+    <div><span>地址</span><b>彰化縣和美鎮彰美路三段 83 號</b></div>
+    <div><span>Email</span><b>n1419@ms56.hinet.net</b></div>
+    <div><span>營業時間</span><b>週一～週五 8:30–18:00<br>週六 8:30–12:00</b></div>
+    <div><span>Facebook</span><b><a href="https://www.facebook.com/TYPHOON.TECH.CO.LTD/" style="color:var(--blue)">泰豐科技粉絲專頁</a></b></div>
+    <div><span>公司統編</span><b>80409774</b></div>
+  </section>
+
+  <h2 style="font-size:18px">朋友收到的名片卡</h2>
+  <p class="sub">在 LINE 聊天室裡會長這樣</p>
+  <div id="preview"></div>
+
+  <div class="foot">泰豐科技有限公司 TYPHOON TECH CO., LTD.<br>林子喨</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CONFIG = {
+  LIFF_ID: "",
+  CARD_URL: "https://sunghan69-sudo.github.io/card/lin/",
+  LINE_URL: "https://line.me/ti/p/0ij0oKbHrr"
+};
+const CARD = {name:"林子喨", tel:"tel:0920073252"};
+const C1="#1C3F7A";
+const FLEX = {type:"flex",altText:"林子喨｜泰豐科技 電子名片",contents:{type:"bubble",size:"mega",
+  hero:{type:"image",url:"https://sunghan69-sudo.github.io/card/lin/card.jpg",size:"full",aspectRatio:"1116:990",aspectMode:"cover",
+    action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
+  footer:{type:"box",layout:"horizontal",paddingAll:"14px",spacing:"sm",backgroundColor:"#F4F7FA",contents:[
+    {type:"button",style:"primary",color:C1,height:"sm",action:{type:"uri",label:"打電話",uri:CARD.tel}},
+    {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}}]}
+}};
+document.getElementById("preview").innerHTML = `<div class="one"><img src="card.jpg" style="display:block;width:100%" alt="名片">
+  <div class="bd"><div class="two"><span style="background:${C1};color:#fff">打電話</span><span>看完整名片</span></div></div></div>`;
+
+const toast = m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};
+let liffReady=false;
+const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+const wantShare=new URLSearchParams(location.search).get("share")==="1";
+function openOut(u){try{const w=window.open(u,"_blank");if(w)return}catch(e){}try{window.top.location.href=u}catch(e){location.href=u}}
+const liffInit=(async()=>{try{if(window.liff&&CONFIG.LIFF_ID){await liff.init({liffId:CONFIG.LIFF_ID});liffReady=true;}}catch(e){console.log(e);}
+  if(wantShare&&liffReady&&liff.isInClient())doShare();})();
+async function doShare(){
+  await liffInit;
+  if(liffReady&&liff.isApiAvailable("shareTargetPicker")){
+    try{const r=await liff.shareTargetPicker([FLEX]);if(r)toast("已傳送，謝謝幫我分享！");}catch(e){toast("分享沒有完成，請再試一次");}
+    return;
+  }
+  if(liffReady&&!inFrame&&!liff.isInClient()&&!liff.isLoggedIn()){liff.login({redirectUri:location.origin+location.pathname+"?share=1"});return}
+  if(CONFIG.LIFF_ID){openOut(CONFIG.CARD_URL+"?share=1");return}
+  openOut("https://line.me/R/share?text="+encodeURIComponent("推薦你林子喨（泰豐科技・淨水設備）的電子名片 👉 "+CONFIG.CARD_URL));
+}
+document.getElementById("bShare").onclick=()=>doShare();
+document.getElementById("bSend").onclick=async()=>{
+  await liffInit;
+  if(liffReady&&liff.isInClient()){try{await liff.sendMessages([FLEX]);toast("已傳到聊天室");}catch(e){toast("請從聊天室裡打開這張名片再試");}}
+  else if(inFrame&&CONFIG.LIFF_ID)openOut(CONFIG.CARD_URL);
+  else toast("這個功能要在 LINE 聊天室裡打開名片才能用");
+};
+document.getElementById("bVcf").onclick=()=>{
+  const v=["BEGIN:VCARD","VERSION:3.0","N:林;子喨;;;","FN:林子喨","ORG:泰豐科技有限公司","EMAIL;TYPE=WORK:n1419@ms56.hinet.net",
+    "TEL;TYPE=CELL:0920-073252","TEL;TYPE=WORK:04-7555548","TEL;TYPE=FAX:04-7575721",
+    "ADR;TYPE=WORK:;;彰美路三段83號;和美鎮;彰化縣;;台灣","URL:https://www.typ-hoon.com.tw","NOTE:LINE "+CONFIG.LINE_URL+"\\n電子名片 "+CONFIG.CARD_URL,"END:VCARD"].join("\r\n");
+  try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([v],{type:"text/vcard"}));a.download="林子喨-泰豐科技.vcf";a.click();toast("已下載聯絡人檔，點開即可存入");}
+  catch(e){toast("請在手機瀏覽器開啟後再存");}
+};
+document.getElementById("bCopy").onclick=async()=>{try{await navigator.clipboard.writeText(CONFIG.CARD_URL);toast("名片連結已複製");}catch(e){toast(CONFIG.CARD_URL);}};
+</script>
+</body>
+</html>

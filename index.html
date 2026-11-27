@@ -90,6 +90,33 @@ h2 span{color:var(--blue)}
 
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#1B2430;color:#fff;font-size:13px;padding:10px 16px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;max-width:88%;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.ptabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px;margin:16px 0 14px;position:sticky;top:8px;z-index:3;box-shadow:0 6px 16px -12px rgba(22,62,110,.5)}
+.ptabs button{flex:1;border:none;background:transparent;color:var(--mute);font:inherit;font-size:13.5px;padding:9px 4px;border-radius:999px;cursor:pointer}
+.ptabs button.on{background:linear-gradient(120deg,var(--blue-d),var(--blue));color:#fff;font-weight:700}
+.pane{display:none}.pane.on{display:block}
+.pane .law{margin-top:0}.pane .detail{margin-top:0}
+.share1{width:100%;border:1px dashed #9DB5D3;background:transparent;color:var(--blue-d);border-radius:14px;padding:12px;font:inherit;font-size:13.5px;margin:12px 0;cursor:pointer}
+.media{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;text-decoration:none;color:var(--ink)}
+.media .mi{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:18px;flex:0 0 auto}
+.mi.th{background:#111}.mi.ig{background:linear-gradient(135deg,#F9A13A,#E1306C 55%,#8A3AB9)}.mi.wp{background:linear-gradient(135deg,var(--blue-d),var(--blue));font-family:Georgia,serif}
+.media .t{flex:1}.media b{display:block;font-size:14.5px}.media small{font-size:11.5px;color:var(--mute)}.media .ar{color:#A9B3BF}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 2px}
+.cats a{background:var(--blue-l);color:var(--blue-d);text-decoration:none;border-radius:12px;padding:11px;text-align:center;font-size:13px;font-weight:700}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.row2 .btn{margin:0}
+.detail a{color:var(--blue-d);text-decoration:none}
+body{padding-bottom:92px}
+.dock{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;gap:8px;justify-content:center;z-index:5}
+.dock a,.dock button{flex:1;max-width:140px;border:none;border-radius:14px;padding:12px 6px;font:inherit;font-weight:700;font-size:13.5px;text-align:center;text-decoration:none;cursor:pointer}
+.dock .call{background:var(--blue-l);color:var(--blue-d)}.dock .line{background:#1F9D55;color:#fff}.dock .share{background:linear-gradient(120deg,var(--blue-d),var(--blue));color:#fff}
+.sheet{position:fixed;inset:0;background:rgba(20,30,45,.35);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.sheet.on{display:flex}
+.sheet .panel{width:100%;max-width:440px;background:#fff;border-radius:22px 22px 0 0;padding:16px 14px calc(18px + env(safe-area-inset-bottom))}
+.sheet .h{display:flex;justify-content:space-between;font-weight:700;margin:2px 4px 12px}.sheet .x{cursor:pointer;color:var(--mute)}
+.sheet button{display:block;width:100%;text-align:left;background:#F3F6FA;border:1px solid var(--line);color:var(--ink);border-radius:14px;padding:12px 14px;margin-bottom:8px;font:inherit;cursor:pointer}
+.sheet button b{display:block;font-size:14.5px}.sheet button small{font-size:11.5px;color:var(--mute)}
+.sheet button[data-k=all]{background:linear-gradient(120deg,var(--blue-d),var(--blue));border:none;color:#fff}.sheet button[data-k=all] small{color:#D6E6F7}
+.toast{bottom:90px!important;z-index:30}
 </style>
 </head>
 <body>
@@ -131,14 +158,11 @@ h2 span{color:var(--blue)}
     <a href="https://www.google.com/maps/search/?api=1&query=彰化市延平路38號"><i>⌖</i>導航</a>
   </div>
 
-  <h2>把這張名片，<span>傳給朋友</span>。</h2>
-  <p class="sub">對方收到的是一張正式的名片卡，點一下就能打電話或看完整名片。</p>
+  <div class="ptabs">
+    <button class="on" data-t="p1">經紀人優勢</button><button data-t="p2">我的自媒體</button><button data-t="p3">聯絡我</button>
+  </div>
 
-  <button class="btn pri" id="bShare"><span class="ic">👥</span><span class="t"><b>分享名片給好友</b><small>一次挑多位好友或群組</small></span><span class="ar">›</span></button>
-  <button class="btn" id="bSend"><span class="ic">💬</span><span class="t"><b>傳送到此聊天室</b><small>直接丟進現在這個對話</small></span><span class="ar">›</span></button>
-  <button class="btn" id="bVcf"><span class="ic">📇</span><span class="t"><b>加入聯絡人</b><small>手機、公司電話、地址一次存好</small></span><span class="ar">›</span></button>
-  <button class="btn" id="bCopy"><span class="ic">🔗</span><span class="t"><b>複製名片連結</b><small>貼到任何地方都能開</small></span><span class="ar">›</span></button>
-
+  <div class="pane on" id="p1">
   <!-- 保險法第九條 -->
   <section class="law">
     <h3>保險法第九條</h3>
@@ -147,21 +171,49 @@ h2 span{color:var(--blue)}
     <div class="chips" id="chips"></div>
     <div class="slogan">品牌不受限　專業更客觀</div>
   </section>
+  <button class="share1" data-k="law">↗ 單獨分享「經紀人優勢」</button>
+  </div>
 
+  <div class="pane" id="p2">
+    <a class="media" href="https://www.threads.com/@mr.tsai2026"><span class="mi th">@</span><span class="t"><b>Threads（脆）</b><small>@mr.tsai2026・每天的業務日常與想法</small></span><span class="ar">›</span></a>
+    <a class="media" href="https://www.instagram.com/mr.tsai2026/"><span class="mi ig">◎</span><span class="t"><b>Instagram</b><small>@mr.tsai2026・老蔡｜保險轉職・業務講堂</small></span><span class="ar">›</span></a>
+    <a class="media" href="https://mrsungs.com"><span class="mi wp">W</span><span class="t"><b>MR.松的業務講堂</b><small>mrsungs.com・文章專欄</small></span><span class="ar">›</span></a>
+    <div class="cats">
+      <a href="https://mrsungs.com">業務與轉職</a><a href="https://mrsungs.com">稅務懶人包</a><a href="https://mrsungs.com">理財．房市</a><a href="https://mrsungs.com">生活隨筆</a>
+    </div>
+    <button class="share1" data-k="media">↗ 單獨分享「我的自媒體」</button>
+  </div>
+
+  <div class="pane" id="p3">
   <section class="detail">
+    <div><span>手機</span><b><a href="tel:0987734588">0987-734-588</a></b></div>
     <div><span>公司電話</span><b>04-7119957</b></div>
     <div><span>傳真</span><b>04-7119697</b></div>
     <div><span>Email</span><b>sunghan69@gmail.com</b></div>
     <div><span>地址</span><b>500 彰化市延平路 38 號 2 樓</b></div>
     <div><span>公司統編</span><b>80386316</b></div>
   </section>
-
-  <h2 style="font-size:18px">朋友收到的名片卡</h2>
-  <p class="sub">在 LINE 聊天室裡會長這樣</p>
-  <div id="preview"></div>
+  <div class="row2"><button class="btn" id="bVcf"><span class="ic">📇</span><span class="t"><b>存入通訊錄</b></span></button><button class="btn" id="bCopy"><span class="ic">🔗</span><span class="t"><b>複製名片連結</b></span></button></div>
+  <button class="btn" id="bSend"><span class="ic">💬</span><span class="t"><b>把整套名片傳到此聊天室</b><small>在 LINE 聊天室裡打開名片時可用</small></span><span class="ar">›</span></button>
+  <button class="share1" data-k="contact">↗ 單獨分享「聯絡資訊」</button>
+  </div>
 
   <div class="foot">永旭保險經紀人．彰北營業部<br>蔡松翰 資深副總</div>
 </div>
+
+<div class="dock">
+  <a class="call" href="tel:0987734588">打電話</a>
+  <a class="line" href="https://line.me/ti/p/mkIp6Tcj-s">加 LINE</a>
+  <button class="share" id="bShare">分享名片</button>
+</div>
+<div class="sheet" id="sheet"><div class="panel">
+  <div class="h">要分享哪一份？<span class="x">✕</span></div>
+  <button data-k="all"><b>整套名片</b><small>名片＋經紀人優勢＋自媒體＋聯絡，對方可左右滑 4 頁</small></button>
+  <button data-k="card"><b>只分享名片</b><small>一張藍銀名片卡</small></button>
+  <button data-k="law"><b>經紀人優勢</b><small>保險法第九條・壽險 13 家・產險 14 家</small></button>
+  <button data-k="media"><b>我的自媒體</b><small>Threads・Instagram・mrsungs.com</small></button>
+  <button data-k="contact"><b>聯絡資訊</b><small>電話、地址＋導航</small></button>
+</div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -181,47 +233,72 @@ document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");draw(b.dataset.k);
 });
 
-/* 分享出去的名片卡（1 張） */
-const CARD = {org:"永旭保險經紀人．彰北營業部", name:"蔡松翰", title:"資深副總", tag:"MDRT・人身／財產／外幣／投資型保險業務員資格合格", phone:"0987-734-588", tel:"tel:0987734588", line2:"壽險 13 家・產險 14 家｜品牌不受限　專業更客觀", addr:"彰化市延平路 38 號 2 樓"};
-const C1="#245A9A", C2="#3B7BC4";
-const FLEX = {type:"flex",altText:CARD.name+"｜永旭保險經紀人 電子名片",contents:{type:"bubble",size:"mega",
-  hero:{type:"image",url:"https://sunghan69-sudo.github.io/card/card.jpg",size:"full",aspectRatio:"1116:900",aspectMode:"cover",
-    action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
-  footer:{type:"box",layout:"horizontal",paddingAll:"14px",spacing:"sm",backgroundColor:"#F4F6F8",contents:[
-    {type:"button",style:"primary",color:C1,height:"sm",action:{type:"uri",label:"打電話",uri:CARD.tel}},
-    {type:"button",style:"secondary",height:"sm",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}}]}
-}};
+/* ===== 分享出去的 LINE 卡片（整套 4 頁 / 單頁） ===== */
+const TEL="tel:0987734588", D="#245A9A", L="#3B7BC4", MU="#5E6B7A", INK="#1B2430";
+const page=k=>CONFIG.CARD_URL+"?p="+k;
+const T=(text,o={})=>Object.assign({type:"text",text,wrap:true,color:INK,size:"sm"},o);
+const btn=(label,uri,primary)=>Object.assign({type:"button",style:primary?"primary":"secondary",height:"sm",action:{type:"uri",label,uri}},primary?{color:D}:{});
+const row=(k,v)=>({type:"box",layout:"baseline",spacing:"md",contents:[T(k,{color:MU,size:"xs",flex:2}),T(v,{size:"xs",flex:5})]});
+function shell(tag,title,body,footer){return {type:"bubble",size:"mega",
+  header:{type:"box",layout:"vertical",paddingAll:"18px",background:{type:"linearGradient",angle:"135deg",startColor:D,endColor:L},contents:[T(tag,{color:"#FFFFFFCC",size:"xxs"}),T(title,{weight:"bold",size:"lg",color:"#FFFFFF"})]},
+  body:{type:"box",layout:"vertical",spacing:"md",paddingAll:"18px",backgroundColor:"#F4F6F8",contents:body},
+  footer:{type:"box",layout:"vertical",spacing:"sm",paddingAll:"14px",backgroundColor:"#F4F6F8",contents:footer}}}
+const B={
+  card:{type:"bubble",size:"mega",
+    hero:{type:"image",url:"https://sunghan69-sudo.github.io/card/card.jpg",size:"full",aspectRatio:"1116:900",aspectMode:"cover",action:{type:"uri",label:"看完整名片",uri:CONFIG.CARD_URL}},
+    footer:{type:"box",layout:"horizontal",spacing:"sm",paddingAll:"14px",backgroundColor:"#F4F6F8",contents:[btn("打電話",TEL,true),btn("看完整名片",CONFIG.CARD_URL)]}},
+  law:shell("01 經紀人優勢","保險法第九條",[
+    T("保險經紀人，是基於被保險人（保戶）的利益，代向各大保險公司洽訂保險契約的人。",{size:"xs",color:MU}),
+    {type:"box",layout:"horizontal",spacing:"sm",contents:[["13","壽險公司"],["14","產險公司"]].map(([a,b])=>({type:"box",layout:"vertical",backgroundColor:"#FFFFFF",cornerRadius:"10px",paddingAll:"10px",contents:[T(a,{color:D,weight:"bold",align:"center",size:"xl"}),T(b,{color:MU,size:"xxs",align:"center"})]}))},
+    T("品牌不受限　專業更客觀",{weight:"bold",align:"center",color:D})
+  ],[btn("看合作公司",page("p1"),true),btn("幫我健檢保單",CONFIG.LINE_URL)]),
+  media:shell("02 我的自媒體","MR.松的業務講堂",[
+    T("業務日常、轉職心得、稅務懶人包與理財觀念，都在這裡。",{size:"xs",color:MU})
+  ],[btn("Threads @mr.tsai2026","https://www.threads.com/@mr.tsai2026",true),btn("Instagram","https://www.instagram.com/mr.tsai2026/"),btn("文章 mrsungs.com","https://mrsungs.com")]),
+  contact:shell("03 聯絡我","蔡松翰｜資深副總",[
+    row("手機","0987-734-588"),row("公司","04-7119957"),row("Email","sunghan69@gmail.com"),row("地址","500 彰化市延平路 38 號 2 樓")
+  ],[btn("打電話",TEL,true),btn("導航",CONFIG.MAP_URL)])
+};
+const ALT={card:"蔡松翰｜永旭保險經紀人 電子名片",law:"保險經紀人的優勢｜蔡松翰",media:"MR.松的業務講堂｜蔡松翰的自媒體",contact:"蔡松翰｜聯絡資訊"};
+const NAME={all:"整套名片",card:"名片",law:"經紀人優勢",media:"我的自媒體",contact:"聯絡資訊"};
+function msgOf(k){
+  if(k==="all")return [{type:"flex",altText:ALT.card+"（左右滑看更多）",contents:{type:"carousel",contents:[B.card,B.law,B.media,B.contact]}}];
+  return [{type:"flex",altText:ALT[k],contents:B[k]}];
+}
 
-document.getElementById("preview").innerHTML = `
-  <div class="one"><img src="card.jpg" style="display:block;width:100%" alt="名片">
-  <div class="bd"><div class="two" style="margin-top:0"><span style="background:${C1};color:#fff">打電話</span><span>看完整名片</span></div></div></div>`;
-
-/* 按鈕 */
-const toast = m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};
+const toast=m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200);};
 let liffReady=false;
 const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
-const wantShare=new URLSearchParams(location.search).get("share")==="1";
 function openOut(u){try{const w=window.open(u,"_blank");if(w)return}catch(e){}try{window.top.location.href=u}catch(e){location.href=u}}
+function showTab(id){if(!document.getElementById(id))return;document.querySelectorAll(".ptabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===id));document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id===id));}
 const liffInit=(async()=>{try{if(window.liff&&CONFIG.LIFF_ID){await liff.init({liffId:CONFIG.LIFF_ID});liffReady=true;}}catch(e){console.log(e);}
-  if(wantShare&&liffReady&&liff.isInClient())doShare();})();
-async function doShare(){
+  const q=new URLSearchParams(location.search); if(q.get("p"))showTab(q.get("p"));
+  const k=q.get("share"); if(k&&liffReady&&liff.isInClient())share(k==="1"?"card":k);})();
+async function share(k){
   await liffInit;
   if(liffReady&&liff.isApiAvailable("shareTargetPicker")){
-    try{const r=await liff.shareTargetPicker([FLEX]);if(r)toast("已傳送，謝謝幫我分享！");}catch(e){toast("分享沒有完成，請再試一次");}
+    try{const r=await liff.shareTargetPicker(msgOf(k));if(r)toast("已分享："+NAME[k]);}catch(e){toast("分享沒有完成，請再試一次");}
     return;
   }
-  if(liffReady&&!inFrame&&!liff.isInClient()&&!liff.isLoggedIn()){liff.login({redirectUri:location.origin+location.pathname+"?share=1"});return}
-  /* 在 CRM 內嵌、或其他瀏覽器：改到 LINE 打開名片並直接跳出選好友 */
-  if(CONFIG.LIFF_ID){openOut(CONFIG.CARD_URL+"?share=1");return}
-  openOut("https://line.me/R/share?text="+encodeURIComponent("推薦你"+CARD.name+"（永旭保險經紀人）的電子名片 👉 "+CONFIG.CARD_URL));
+  if(liffReady&&!inFrame&&!liff.isInClient()&&!liff.isLoggedIn()){liff.login({redirectUri:location.origin+location.pathname+"?share="+k});return}
+  if(CONFIG.LIFF_ID){openOut(CONFIG.CARD_URL+"?share="+k);return}
 }
-document.getElementById("bShare").onclick=()=>doShare();
-document.getElementById("bSend").onclick=async()=>{
+async function sendHere(k){
   await liffInit;
-  if(liffReady&&liff.isInClient()){try{await liff.sendMessages([FLEX]);toast("已傳到聊天室");}catch(e){toast("請從聊天室裡打開這張名片再試");}}
+  if(liffReady&&liff.isInClient()){try{await liff.sendMessages(msgOf(k));toast("已傳到聊天室");}catch(e){toast("請從聊天室裡打開這張名片再試");}}
   else if(inFrame&&CONFIG.LIFF_ID)openOut(CONFIG.CARD_URL);
   else toast("這個功能要在 LINE 聊天室裡打開名片才能用");
-};
+}
+const order=["p1","p2","p3"];
+document.querySelectorAll(".ptabs button").forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+let sx=null;document.addEventListener("touchstart",e=>{if(e.target.closest(".pane")&&!e.target.closest(".chips"))sx=e.touches[0].clientX},{passive:true});
+document.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)<60)return;
+  const cur=order.indexOf(document.querySelector(".pane.on").id);const n=cur+(dx<0?1:-1);if(n>=0&&n<order.length)showTab(order[n]);});
+const sheet=document.getElementById("sheet");
+document.getElementById("bShare").onclick=()=>sheet.classList.add("on");
+sheet.onclick=e=>{const b=e.target.closest("[data-k]");if(b){sheet.classList.remove("on");share(b.dataset.k);}else if(e.target===sheet||e.target.closest(".x"))sheet.classList.remove("on");};
+document.querySelectorAll(".share1").forEach(b=>b.onclick=()=>share(b.dataset.k));
+document.getElementById("bSend").onclick=()=>sendHere("all");
 document.getElementById("bVcf").onclick=()=>{
   const v=["BEGIN:VCARD","VERSION:3.0","N:蔡;松翰;;;","FN:蔡松翰","ORG:永旭保險經紀人;彰北營業部","TITLE:資深副總",
     "TEL;TYPE=CELL:0987-734-588","TEL;TYPE=WORK:04-7119957","TEL;TYPE=FAX:04-7119697","EMAIL:sunghan69@gmail.com",

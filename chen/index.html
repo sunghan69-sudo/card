@@ -132,6 +132,16 @@ body{padding-bottom:92px}
 .honors li::before{content:"★";position:absolute;left:2px;color:#C9A44C;font-size:12px;top:7px}
 .mecta{display:block;margin-top:14px;text-align:center;background:#1F9D55;color:#fff;text-decoration:none;border-radius:12px;padding:11px;font-weight:700}
 .avatar{position:absolute;left:52%;top:90px;width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center 18%;border:3px solid #fff;box-shadow:0 8px 18px -8px rgba(14,92,143,.6)}
+
+.me h4{font-size:13px;color:var(--blue-d);margin:16px 0 6px;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
+.me h4::before{content:"";width:3px;height:13px;border-radius:2px;background:var(--blue)}
+.mebadges{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.mebadges span{font-size:11px;padding:3px 8px;border-radius:999px;background:#FBF3E0;color:#8A6A1F;font-weight:700}
+.dots{list-style:none}.dots li{font-size:13px;padding:4px 0 4px 14px;position:relative}.dots li::before{content:"";position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.tl{list-style:none;border-left:2px solid #D5E2EF;margin-left:4px}.tl li{font-size:13px;padding:4px 0 8px 14px;position:relative}.tl li::before{content:"";position:absolute;left:-6px;top:9px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--blue)}.tl b{display:block;font-size:12px;color:var(--blue-d)}
+.mdrtg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}.mdrtg div{background:linear-gradient(135deg,#F3F7FB,#E6EEF6);border-radius:12px;padding:10px 12px}.mdrtg b{display:block;font-family:Montserrat,sans-serif;color:var(--blue-d)}.mdrtg small{font-size:11.5px;color:var(--mute);line-height:1.5}
+.me .honors{margin-top:0;border-top:none;padding-top:0}
+.lic{font-size:13px}
+.mi.fb{background:#1877F2;font-family:Georgia,serif}
 </style>
 </head>
 <body>
@@ -171,7 +181,7 @@ body{padding-bottom:92px}
   </div>
 
   <div class="ptabs">
-    <button class="on" data-t="p1">經紀人優勢</button><button data-t="p2">關於我</button><button data-t="p3">聯絡我</button>
+    <button class="on" data-t="p1">經紀人優勢</button><button data-t="p2">關於我</button><button data-t="p4">社群</button><button data-t="p3">聯絡我</button>
   </div>
 
   <div class="pane on" id="p1">
@@ -190,12 +200,35 @@ body{padding-bottom:92px}
     <div class="me">
       <div class="metop">
         <img class="photo" src="photo.jpg" alt="陳欣瑜">
-        <div><div class="mename">陳欣瑜</div><div class="metitle">永旭保險經紀人<br>職場負責人．資深副總</div></div>
+        <div><div class="mename">陳欣瑜</div><div class="metitle">永旭保險經紀人<br>職場負責人．資深副總</div>
+          <div class="mebadges"><span>MDRT COT</span><span>永旭之星</span></div></div>
       </div>
-      <ul class="honors"><li>保險公會最佳業務員獎</li><li>MDRT 百萬圓桌 COT 會員</li><li>APFinSA 亞太金融業務大獎</li><li>IDA 國際龍獎</li><li>人身／財產／外幣／投資型保險業務員資格合格</li></ul>
+      <h4>現任</h4>
+      <ul class="dots"><li>永旭保險經紀人　職場負責人．資深副總</li><li>永旭日本海外極峰會　副會長</li></ul>
+      <h4>經歷</h4>
+      <ul class="tl">
+        <li><b>民國 99 年</b>投入保險業，曾任資深總監</li>
+        <li><b>民國 114 年 7 月</b>加入永旭保險經紀人</li>
+      </ul>
+      <h4>MDRT 百萬圓桌</h4>
+      <div class="mdrtg">
+        <div><b>2024–2026</b><small>內閣會員 COT<br>連續 3 年</small></div>
+        <div><b>2021–2023</b><small>百萬圓桌會員<br>連續 3 年</small></div>
+      </div>
+      <ul class="dots"><li>MDRT 邁阿密年會講者</li><li>2021、2025 MDRT 年會出席</li></ul>
+      <h4>獲獎與肯定</h4>
+      <ul class="honors"><li>IDA 國際龍獎　銀龍獎</li><li>IFPA 頂尖保險獎</li><li>APFinSA Awards</li><li>保險公會優秀從業人員</li><li>永旭之星・永旭千萬所得會員</li></ul>
+      <h4>專業資格</h4>
+      <p class="lic">人身／財產／外幣／投資型保險業務員資格合格</p>
       <a class="mecta" href="https://line.me/ti/p/Z4omVo7lxt">LINE 找我聊聊</a>
     </div>
     <button class="share1" data-k="about">↗ 單獨分享「關於我」</button>
+  </div>
+
+  <div class="pane" id="p4">
+    <a class="media" href="https://www.facebook.com/share/1AUmm6QPnr/"><span class="mi fb">f</span><span class="t"><b>Facebook</b><small>陳欣瑜・生活與工作日常</small></span><span class="ar">›</span></a>
+    <a class="media" href="https://www.instagram.com/fish19880408/"><span class="mi ig">◎</span><span class="t"><b>Instagram</b><small>@fish19880408</small></span><span class="ar">›</span></a>
+    <button class="share1" data-k="media">↗ 單獨分享「社群」</button>
   </div>
 
   <div class="pane" id="p3">
@@ -222,10 +255,11 @@ body{padding-bottom:92px}
 </div>
 <div class="sheet" id="sheet"><div class="panel">
   <div class="h">要分享哪一份？<span class="x">✕</span></div>
-  <button data-k="all"><b>整套名片</b><small>名片＋經紀人優勢＋關於我＋聯絡，對方可左右滑 4 頁</small></button>
+  <button data-k="all"><b>整套名片</b><small>名片＋經紀人優勢＋關於我＋社群＋聯絡，對方可左右滑 5 頁</small></button>
   <button data-k="card"><b>只分享名片</b><small>一張藍銀名片卡</small></button>
   <button data-k="law"><b>經紀人優勢</b><small>保險法第九條・壽險 13 家・產險 14 家</small></button>
-  <button data-k="about"><b>關於我</b><small>照片・獲獎與資格</small></button>
+  <button data-k="about"><b>關於我</b><small>經歷・MDRT・獲獎</small></button>
+  <button data-k="media"><b>社群</b><small>Facebook・Instagram</small></button>
   <button data-k="contact"><b>聯絡資訊</b><small>電話、地址＋導航</small></button>
 </div></div>
 <div class="toast" id="toast"></div>
@@ -273,16 +307,17 @@ const B={
         {type:"image",url:"https://sunghan69-sudo.github.io/card/chen/photo.jpg",size:"full",aspectRatio:"4:5",aspectMode:"cover",flex:2,action:{type:"uri",label:"關於我",uri:page("p2")}},
         {type:"box",layout:"vertical",flex:3,spacing:"xs",contents:[T("陳欣瑜",{weight:"bold",size:"xl"}),T("永旭保險經紀人",{size:"xs",color:MU}),T("職場負責人．資深副總",{size:"xs",color:MU})]}]},
       {type:"separator",margin:"md",color:"#DDE3EA"},
-      T("保險公會最佳業務員獎・MDRT COT・APFinSA・IDA 國際龍獎",{size:"xs",margin:"md"})]},
+      T("MDRT 內閣會員 COT（2024–2026）",{size:"xs",margin:"md"}),T("MDRT 邁阿密年會講者・IDA 銀龍獎・IFPA 頂尖保險獎",{size:"xs"}),T("永旭之星・永旭日本海外極峰會副會長",{size:"xs"})]},
     footer:{type:"box",layout:"vertical",spacing:"sm",paddingAll:"14px",backgroundColor:"#F4F6F8",contents:[btn("LINE 找我聊聊",CONFIG.LINE_URL,true),btn("看完整名片",CONFIG.CARD_URL)]}},
-  contact:shell("03 聯絡我","陳欣瑜｜職場負責人．資深副總",[
+  media:shell("03 社群","陳欣瑜的社群",[T("工作日常、客戶故事與生活分享。",{size:"xs",color:MU})],[btn("Facebook","https://www.facebook.com/share/1AUmm6QPnr/",true),btn("Instagram @fish19880408","https://www.instagram.com/fish19880408/")]),
+  contact:shell("04 聯絡我","陳欣瑜｜職場負責人．資深副總",[
     row("手機","0909-530-408"),row("公司","04-7119957"),row("Email","fish19880408@gmail.com"),row("地址","500 彰化市延平路 38 號 2 樓")
   ],[btn("打電話",TEL,true),btn("導航",CONFIG.MAP_URL)])
 };
-const ALT={card:"陳欣瑜｜永旭保險經紀人 電子名片",law:"保險經紀人的優勢｜陳欣瑜",about:"關於陳欣瑜｜職場負責人．資深副總",contact:"陳欣瑜｜聯絡資訊"};
-const NAME={all:"整套名片",card:"名片",law:"經紀人優勢",about:"關於我",contact:"聯絡資訊"};
+const ALT={card:"陳欣瑜｜永旭保險經紀人 電子名片",law:"保險經紀人的優勢｜陳欣瑜",about:"關於陳欣瑜｜職場負責人．資深副總",media:"陳欣瑜的社群｜Facebook・Instagram",contact:"陳欣瑜｜聯絡資訊"};
+const NAME={all:"整套名片",card:"名片",law:"經紀人優勢",about:"關於我",media:"社群",contact:"聯絡資訊"};
 function msgOf(k){
-  if(k==="all")return [{type:"flex",altText:ALT.card+"（左右滑看更多）",contents:{type:"carousel",contents:[B.card,B.law,B.about,B.contact]}}];
+  if(k==="all")return [{type:"flex",altText:ALT.card+"（左右滑看更多）",contents:{type:"carousel",contents:[B.card,B.law,B.about,B.media,B.contact]}}];
   return [{type:"flex",altText:ALT[k],contents:B[k]}];
 }
 
@@ -309,7 +344,7 @@ async function sendHere(k){
   else if(inFrame&&CONFIG.LIFF_ID)openOut(CONFIG.CARD_URL);
   else toast("這個功能要在 LINE 聊天室裡打開名片才能用");
 }
-const order=["p1","p2","p3"];
+const order=["p1","p2","p4","p3"];
 document.querySelectorAll(".ptabs button").forEach(b=>b.onclick=()=>showTab(b.dataset.t));
 let sx=null;document.addEventListener("touchstart",e=>{if(e.target.closest(".pane")&&!e.target.closest(".chips"))sx=e.touches[0].clientX},{passive:true});
 document.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)<60)return;
